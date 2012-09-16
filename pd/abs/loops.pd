@@ -1,0 +1,69 @@
+#N canvas 105 39 868 311 10;
+#X obj -176 189 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X obj -176 165 == 1;
+#X obj -96 189 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj -16 189 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 64 189 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj -96 165 == 2;
+#X obj -16 165 == 3;
+#X obj 64 165 == 4;
+#X obj 144 189 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 144 165 == 5;
+#X obj -176 210 s \$1-1-vol;
+#X obj -96 210 s \$1-2-vol;
+#X obj -16 210 s \$1-3-vol;
+#X obj 64 210 s \$1-4-vol;
+#X obj 144 210 s \$1-5-vol;
+#X obj -176 17 inlet;
+#X obj 224 189 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 304 189 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 384 189 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 224 165 == 6;
+#X obj 304 165 == 7;
+#X obj 384 165 == 8;
+#X obj 224 210 s \$1-6-vol;
+#X obj 304 210 s \$1-7-vol;
+#X obj 384 210 s \$1-8-vol;
+#X obj 459 188 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 459 164 == 9;
+#X obj 459 209 s \$1-9-vol;
+#X obj -176 75 t f f f f f f f f f;
+#X obj -176 47 + 1;
+#X connect 0 0 10 0;
+#X connect 1 0 0 0;
+#X connect 2 0 11 0;
+#X connect 3 0 12 0;
+#X connect 4 0 13 0;
+#X connect 5 0 2 0;
+#X connect 6 0 3 0;
+#X connect 7 0 4 0;
+#X connect 8 0 14 0;
+#X connect 9 0 8 0;
+#X connect 15 0 29 0;
+#X connect 16 0 22 0;
+#X connect 17 0 23 0;
+#X connect 18 0 24 0;
+#X connect 19 0 16 0;
+#X connect 20 0 17 0;
+#X connect 21 0 18 0;
+#X connect 25 0 27 0;
+#X connect 26 0 25 0;
+#X connect 28 0 1 0;
+#X connect 28 1 5 0;
+#X connect 28 2 6 0;
+#X connect 28 3 7 0;
+#X connect 28 4 9 0;
+#X connect 28 5 19 0;
+#X connect 28 6 20 0;
+#X connect 28 7 21 0;
+#X connect 28 8 26 0;
+#X connect 29 0 28 0;
