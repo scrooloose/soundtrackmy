@@ -13,10 +13,6 @@ module SoundtrackMy
       build_response.to_json
     end
 
-    def get_readings
-      gps_readings
-    end
-
     private
 
       def build_response
