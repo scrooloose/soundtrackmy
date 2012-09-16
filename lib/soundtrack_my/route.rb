@@ -38,7 +38,7 @@ module SoundtrackMy
         readings.each_with_index do |gps_reading, idx|
           speed = find_speed_for(gps_readings, idx)
           elevation = elevations[idx]
-          zone = zone_calculator.zone_number_for(gps_reading)
+          zone = zone_calculator.zone_number_for(gps_reading) % 80
 
           markers << Marker.new(gps_reading, elevation, speed, zone)
         end

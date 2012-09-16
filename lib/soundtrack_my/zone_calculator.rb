@@ -1,7 +1,7 @@
 module SoundtrackMy
   class ZoneCalculator
-    Height = 8.0
-    Width = 8.0
+    Height = 100.0
+    Width = 100.0
 
     def initialize(gps_readings)
       @gps_readings = gps_readings
@@ -19,11 +19,11 @@ module SoundtrackMy
 
     private
       def zone_lat_size
-        @zone_lat_size ||= (max_lat - min_lat) / Width
+        @zone_lat_size ||= (max_lat - min_lat) / (Width-1)
       end
 
       def zone_lng_size
-        @zone_lng_size ||= (max_lng - min_lng) / Height
+        @zone_lng_size ||= (max_lng - min_lng) / (Height-1)
       end
 
       def max_lat
