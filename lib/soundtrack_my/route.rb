@@ -1,9 +1,5 @@
 module SoundtrackMy
   class Route
-
-    #the mapmyrun api doesnt give us the start time, so just hardcode it
-    StartTime = Time.parse("2012-09-15 18:00:00")
-
     def initialize(route_id, max_markers)
       @route_id = route_id
       @max_markers = max_markers
