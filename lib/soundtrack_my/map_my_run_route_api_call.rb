@@ -1,6 +1,3 @@
-require 'json'
-require 'httparty'
-
 module SoundtrackMy
 
   class MapMyRunRouteApiCall
@@ -11,7 +8,7 @@ module SoundtrackMy
     def get_route_data
       url = route_call_url
       data = make_api_call(url)
-      extract_coordinates(data)
+      extract_gps_readings(data)
     end
 
     private
@@ -29,8 +26,10 @@ module SoundtrackMy
       "http://api.mapmyfitness.com/3.1"
     end
 
-    def extract_coordinates(data)
-      data['result']['output']['points']
+    def extract_gps_readings(data)
+      data['result']['output']['points'].map do |point|
+        GpsReading.new(point['lat'], point['lng'])
+      end
     rescue
       raise("Malformed data")
     end
