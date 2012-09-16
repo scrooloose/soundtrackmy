@@ -4,8 +4,9 @@ module SoundtrackMy
     #the mapmyrun api doesnt give us the start time, so just hardcode it
     StartTime = Time.parse("2012-09-15 18:00:00")
 
-    def initialize(route_id)
+    def initialize(route_id, max_markers)
       @route_id = route_id
+      @max_markers = max_markers
     end
 
     def output_for_pd
@@ -50,7 +51,10 @@ module SoundtrackMy
       end
 
       def gps_readings
-        @gps_readings ||= MapMyRunRouteApiCall.new(@route_id).get_route_data
+        @gps_readings ||= begin
+          readings = MapMyRunRouteApiCall.new(@route_id).get_route_data
+          DataThinner.new(readings, @max_markers).data
+        end
       end
 
       def find_speed_for(gps_readings, idx)
