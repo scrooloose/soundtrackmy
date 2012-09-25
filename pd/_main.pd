@@ -1,5 +1,6 @@
-#N canvas 550 265 603 457 10;
+#N canvas 550 265 586 496 10;
 #X declare -path abs;
+#X declare -path rj;
 #X obj 83 56 dumpOSC 8080;
 #X text 162 56 // JSON data comes in via OSC;
 #N canvas 154 22 1286 694 sounds 0;
@@ -10,7 +11,7 @@
 #X obj 438 100 s reset;
 #X msg 461 73 0;
 #X obj 554 349 hradio 15 1 0 10 empty empty empty 0 -8 0 10 -262144
--1 -1 2;
+-1 -1 0;
 #X obj 710 349 hradio 15 1 0 10 empty empty empty 0 -8 0 10 -262144
 -1 -1 0;
 #X floatatom 635 375 5 0 0 0 - - -;
@@ -48,7 +49,7 @@
 #X obj 1051 407 s elevation;
 #X floatatom 885 398 5 0 0 0 - - -;
 #X obj 948 435 vsl 15 128 0.8 1.2 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 4881 1;
+-1 -1 0 1;
 #X text 962 490 <-- 1;
 #X text 962 426 <-- 1.1;
 #X text 962 553 <-- 0.9;
@@ -139,7 +140,7 @@
 #X connect 68 0 67 0;
 #X restore 83 364 pd sounds;
 #X obj 62 20 declare -path abs;
-#N canvas 0 22 694 617 io 0;
+#N canvas 0 22 625 630 io 0;
 #X obj 35 84 catch~ L;
 #X obj 114 84 catch~ R;
 #X obj 35 584 dac~;
@@ -220,6 +221,12 @@
 #X floatatom 414 32 5 0 0 0 - - -;
 #X obj 483 426 loadbang;
 #X msg 485 453 1;
+#X obj 144 594 writesf~ 2;
+#X msg 200 558 open journey1.wav;
+#X msg 172 536 start;
+#X obj 179 483 r start-recording;
+#X obj 179 509 t b b;
+#X msg 242 525 stop;
 #X connect 0 0 3 0;
 #X connect 1 0 9 0;
 #X connect 3 0 10 0;
@@ -235,7 +242,9 @@
 #X connect 9 0 11 0;
 #X connect 9 0 29 0;
 #X connect 10 0 2 0;
+#X connect 10 0 47 0;
 #X connect 11 0 2 1;
+#X connect 11 0 47 1;
 #X connect 12 0 11 1;
 #X connect 12 0 10 1;
 #X connect 15 0 36 0;
@@ -278,6 +287,12 @@
 #X connect 44 0 43 0;
 #X connect 45 0 46 0;
 #X connect 46 0 30 0;
+#X connect 48 0 47 0;
+#X connect 49 0 47 0;
+#X connect 50 0 51 0;
+#X connect 51 0 49 0;
+#X connect 51 1 48 0;
+#X connect 52 0 47 0;
 #X restore 83 343 pd io;
 #X obj 234 359 table speed 300;
 #X obj 234 379 table zone 300;
@@ -300,26 +315,26 @@
 #X obj 301 157 s ele-low;
 #X obj 395 313 tabwrite ele;
 #X obj 234 399 table ele 300;
-#N canvas 73 621 264 244 timebase 1;
-#X obj 85 78 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1 1
+#N canvas 73 621 264 244 timebase 0;
+#X obj 85 78 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0 1
 ;
 #X obj 85 99 metro 1000;
 #X obj 124 122 + 1;
 #X obj 85 188 s tick;
 #X floatatom 148 197 5 0 0 0 - - -;
 #X obj 85 152 mod 300;
-#X obj 85 122 f 120;
 #X obj 85 50 r go;
 #X msg 126 66 120;
+#X obj 85 122 f 0;
 #X connect 0 0 1 0;
-#X connect 1 0 6 0;
-#X connect 2 0 6 1;
+#X connect 1 0 8 0;
+#X connect 2 0 8 1;
 #X connect 5 0 3 0;
 #X connect 5 0 4 0;
-#X connect 6 0 2 0;
-#X connect 6 0 5 0;
-#X connect 7 0 0 0;
-#X connect 8 0 6 1;
+#X connect 6 0 0 0;
+#X connect 7 0 8 1;
+#X connect 8 0 2 0;
+#X connect 8 0 5 0;
 #X restore 83 385 pd timebase;
 #N canvas 0 22 450 300 random-grid 0;
 #X obj 69 31 c_urn 9;
@@ -378,7 +393,10 @@
 #X floatatom 420 177 5 0 0 0 - - -;
 #X obj 409 360 bng 30 250 50 0 empty empty empty 17 7 0 10 -204786
 -1 -1;
-#X obj 409 398 s go;
+#X obj 477 420 s go;
+#X obj 452 399 t b b;
+#X obj 447 447 s start-recording;
+#X obj 182 20 declare -path rj;
 #X connect 0 0 27 0;
 #X connect 8 0 9 0;
 #X connect 8 0 7 1;
@@ -410,4 +428,6 @@
 #X connect 27 5 30 0;
 #X connect 27 6 29 0;
 #X connect 27 6 31 0;
-#X connect 32 0 33 0;
+#X connect 32 0 34 0;
+#X connect 34 0 35 0;
+#X connect 34 1 33 0;
