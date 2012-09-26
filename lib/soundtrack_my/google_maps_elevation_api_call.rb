@@ -11,7 +11,7 @@ module SoundtrackMy
 
       @gps_readings.each_slice(BatchSize) do |batch|
         elevations = elevations + elevations_for_batch(batch)
-        sleep(2)
+        sleep(1)
       end
 
       elevations
@@ -26,7 +26,7 @@ module SoundtrackMy
       end
 
       def create_url(batch)
-        
+
         locations = ""
 
         batch.each_with_index do |gps_reading,idx|
