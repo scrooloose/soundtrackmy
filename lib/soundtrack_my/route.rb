@@ -1,8 +1,7 @@
 module SoundtrackMy
   class Route
-    def initialize(route_id, max_markers)
-      @route_id = route_id
-      @max_markers = max_markers
+    def initialize(gps_readings)
+      @gps_readings = gps_readings
     end
 
     def output_for_pd
@@ -25,14 +24,13 @@ module SoundtrackMy
       end
 
       def build_markers
-        readings = gps_readings
-        elevations = elevations_for_readings(readings)
+        elevations = elevations_for_readings(@gps_readings)
 
-        zone_calculator = ZoneCalculator.new(readings)
+        zone_calculator = ZoneCalculator.new(@gps_readings)
 
         markers = []
-        readings.each_with_index do |gps_reading, idx|
-          speed = find_speed_for(gps_readings, idx)
+        @gps_readings.each_with_index do |gps_reading, idx|
+          speed = find_speed_for(@gps_readings, idx)
           elevation = elevations[idx]
           zone = zone_calculator.zone_number_for(gps_reading) % 80
 
@@ -40,13 +38,6 @@ module SoundtrackMy
         end
 
         markers
-      end
-
-      def gps_readings
-        @gps_readings ||= begin
-          readings = MapMyRunRouteApiCall.new(@route_id).get_route_data
-          DataThinner.new(readings, @max_markers).data
-        end
       end
 
       def find_speed_for(gps_readings, idx)
